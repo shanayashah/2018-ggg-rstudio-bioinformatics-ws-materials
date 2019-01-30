@@ -12,16 +12,12 @@ PS1='$ '
 
 to get a shorter prompt.
 
-Side note: we are using RStudio Server as a Web interface to run shell
-commands. This is for convenience but isn't necessary. Later on, we'll use
-RStudio to run R commands :).
-
 ## Running BLAST
 
 First! We need some data.  Let's grab the mouse and zebrafish RefSeq
 protein data sets from NCBI, and put them in our home directory. If you've just logged
 in, you should be there already, but if you're unsure, just run `cd` and hit enter. Now,
-we'll use `curl` to download the files; these originally came from the NCBI Web site: [ftp://ftp.ncbi.nih.gov/refseq/M_musculus/mRNA_Prot](ftp://ftp.ncbi.nih.gov/refseq/M_musculus/mRNA_Prot).
+we'll use `curl` to download the files; these originally came from the NCBI Web site: ftp://ftp.ncbi.nih.gov/refseq/M_musculus/mRNA_Prot
 
 ```
 curl -o mouse.1.protein.faa.gz -L https://osf.io/v6j9x/download
@@ -35,7 +31,7 @@ files, along with a directory called lost+found which is for system
 information:
 
 ```
-ls -l
+ls -l [Use ls -lh for human friendly version]
 ```
 
 should show you:
@@ -50,9 +46,6 @@ drwxr-xr-x 3 jovyan jovyan     4096 Feb 21 01:35 R
 -rw-r--r-- 4 jovyan jovyan       13 Feb 20 01:03 runtime.txt
 -rw-r--r-- 1 jovyan jovyan 13963093 Feb 21 01:41 zebrafish.1.protein.faa.gz
 ```
-
-(Note that this matches what you'll see if you look at the RStudio file browser,
-lower left.)
 
 All three of the files are FASTA protein files (that's what the .faa
 suggests) that are compressed with `gzip` (that's what the .gz means).
@@ -93,6 +86,8 @@ by calling 'makeblastdb':
 
 ```
 makeblastdb -in zebrafish.1.protein.faa -dbtype prot
+
+It will make different index files, to ease the search process. Eg in a phone book it is only indexed by name and its hence easy to only search by name and not my phone number
 ```
 
 Next, we call BLAST to do the search:
